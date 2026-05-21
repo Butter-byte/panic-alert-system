@@ -1,0 +1,17 @@
+# Node
+node_modules/
+
+# Environment variables
+.env
+
+# Arduino
+*.tmp
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
