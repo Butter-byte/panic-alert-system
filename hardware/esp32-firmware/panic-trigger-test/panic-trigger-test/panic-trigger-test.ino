@@ -6,7 +6,7 @@
 const char* WIFI_NAME = "Airtel_amit_0005";
 const char* WIFI_PASSWORD = "Air@58842";
 
-const char* SERVER_URL = "https://webhook.site/80681856-ee38-427b-80fd-201ecb6bca22";
+const char* SERVER_URL = "http://192.168.1.6:3000/emergency";
 
 void sendEvent(String eventType) {
 
