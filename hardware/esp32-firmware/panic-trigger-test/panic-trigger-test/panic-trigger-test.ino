@@ -1,4 +1,5 @@
 #include <WiFi.h>
+#include <WiFiClientSecure.h>
 #include <HTTPClient.h>
 
 #define BUTTON_PIN 18
@@ -6,13 +7,17 @@
 const char* WIFI_NAME = "Airtel_amit_0005";
 const char* WIFI_PASSWORD = "Air@58842";
 
-const char* SERVER_URL = "http://192.168.1.6:3000/emergency";
+const char* SERVER_URL = "https://panic-alert-api-hrishi.azurewebsites.net/emergency";
 
 void sendEvent(String eventType) {
 
+  WiFiClientSecure client;
+
+  client.setInsecure();
+
   HTTPClient http;
 
-  http.begin(SERVER_URL);
+  http.begin(client, SERVER_URL);
 
   http.addHeader("Content-Type", "application/json");
 
@@ -57,18 +62,9 @@ void loop() {
 
   if(currentState != lastState) {
 
-    if(currentState == LOW) {
+    Serial.println("PANIC TRIGGERED");
 
-      Serial.println("EMERGENCY ACTIVE");
-
-      sendEvent("EMERGENCY_ACTIVE");
-    }
-    else {
-
-      Serial.println("EMERGENCY CLEARED");
-
-      sendEvent("EMERGENCY_CLEARED");
-    }
+    sendEvent("PANIC_TRIGGERED");
 
     lastState = currentState;
 
